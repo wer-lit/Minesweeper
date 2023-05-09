@@ -61,39 +61,45 @@ public class GameController {
         return view.getTaskNumber();
     }
 
+    private int getNumberToUncover(){
+        return model.getTotalToUncover();
+    }
+
     public void playGame(){
         printResult();
         while (getGameState()){
             printMenu();
-            int task = getTaskNumber();
+            int task = getTaskNumber() - 1;
+            String[] tasks = {"UNCOVER", "PUT", "DELETE", "EXIT"};
+            String taskStr = tasks[task];
             int [] move;
-            switch (task){
-                case 1:
+            switch (taskStr){
+                case "UNCOVER":
                     move = getMove();
                     if (checkCoordinates(move[0], move[1])){
                         uncoverField(move[0], move[1]);
                     }
                     break;
-                case 2:
+                case "PUT":
                     move = getMove();
                     if (checkCoordinates(move[0], move[1])){
                         putFlag(move[0], move[1]);
                     }
                     break;
-                case 3:
+                case "DELETE":
                     move = getMove();
                     if (checkCoordinates(move[0], move[1])){
                         deleteFlag(move[0], move[1]);
                     }
                     break;
-                case 4:
+                case "EXIT":
                     System.exit(0);
                     break;
             }
             printResult();
         }
         if (!getGameState()){
-            if (getUncovered() == (model.NUMBER_OF_FIELDS - model.NUMBER_OF_MINES)){
+            if (getUncovered() == getNumberToUncover()){
                 wonGame();
             }
             else {

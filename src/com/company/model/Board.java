@@ -7,8 +7,8 @@ public class Board {
     private int uncovered;
     private boolean gameON;
     private final int BOARD_SIZE = 10;
-    public final int NUMBER_OF_MINES = 10;
-    public final int NUMBER_OF_FIELDS = 100;
+    private final int NUMBER_OF_MINES = 10;
+    private final int NUMBER_OF_FIELDS = 100;
     private final char DEFAULT_SYMBOL = 'X';
     private final char FLAG = 'F';
     private final char MINE = '#';
@@ -156,6 +156,10 @@ public class Board {
 
     public boolean isGameON() {
         return gameON;
+    }
+
+    public int getTotalToUncover(){
+        return NUMBER_OF_FIELDS - NUMBER_OF_MINES;
     }
 
 }
